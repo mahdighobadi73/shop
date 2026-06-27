@@ -1,0 +1,63 @@
+import { Routes, Route, Navigate } from "react-router-dom";
+import Layout from "../components/layout/Layout";
+import HomePage from "../pages/HomePage";
+import ProductsPage from "../pages/ProductsPage";
+import ProductDetailsPage from "../pages/ProductDetailsPage";
+import CartPage from "../pages/CartPage";
+import CheckoutPage from "../pages/CheckoutPage";
+import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
+import ProfilePage from "../pages/ProfilePage";
+import OrdersPage from "../pages/OrdersPage";
+import NotFoundPage from "../pages/NotFoundPage";
+import ProtectedRoute from "./ProtectedRoute";
+import AdminRoute from "./AdminRoute";
+import AdminPage from "../features/admin/AdminPage";
+
+export default function AppRoutes () {
+    return (
+        <Routes>
+            <Route element={ <Layout /> }>
+                <Route index element={ <HomePage /> } />
+                <Route path="products" element={ <ProductsPage /> } />
+                <Route path="products/:id" element={ <ProductDetailsPage /> } />
+                <Route path="cart" element={ <CartPage /> } />
+                <Route
+                    path="checkout"
+                    element={
+                        <ProtectedRoute>
+                            <CheckoutPage />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route path="login" element={ <LoginPage /> } />
+                <Route path="register" element={ <RegisterPage /> } />
+                <Route
+                    path="profile"
+                    element={
+                        <ProtectedRoute>
+                            <ProfilePage />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="orders"
+                    element={
+                        <ProtectedRoute>
+                            <OrdersPage />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="admin"
+                    element={
+                        <AdminRoute>
+                            <AdminPage />
+                        </AdminRoute>
+                    }
+                />
+                <Route path="*" element={ <NotFoundPage /> } />
+            </Route>
+        </Routes>
+    );
+}

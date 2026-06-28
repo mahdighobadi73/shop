@@ -65,3 +65,23 @@
 .page {
     padding: 24px;
 }
+
+.navbar {
+    display: none;
+}
+
+@media(min-width:768px) {
+
+    .navbar {
+
+        display: flex;
+
+    }
+
+    .bottom-nav {
+
+        display: none;
+
+    }
+
+}

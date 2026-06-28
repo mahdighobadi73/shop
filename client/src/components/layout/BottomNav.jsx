@@ -50,9 +50,14 @@ export default function BottomNav () {
                     </NavLink>
                 </>
             ) : (
-                <NavLink to="/login" className="bottom-nav__link">
-                    <FiLogIn />
-                    <span>ورود</span>
+                <NavLink to="/profile" className="bottom-nav__link">
+                    <span className="bottom-nav__icon-wrap">
+                        <FiUser />
+                    </span>
+
+                    <span>
+                        { isAuthenticated ? "حساب" : "ورود" }
+                    </span>
                 </NavLink>
             ) }
         </nav>

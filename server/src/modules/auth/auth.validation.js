@@ -1,16 +1,38 @@
 const { body } = require( "express-validator" );
 
-const registerValidation = [
-    body( "name" ).notEmpty().withMessage( "Name is required" ),
-    body( "email" ).isEmail().withMessage( "Valid email is required" ),
+exports.registerValidation = [
+    body( "name" )
+        .trim()
+        .notEmpty()
+        .withMessage( "نام الزامی است" )
+        .isLength( { min: 2 } )
+        .withMessage( "نام باید حداقل ۲ کاراکتر باشد" ),
+
+    body( "email" )
+        .trim()
+        .notEmpty()
+        .withMessage( "ایمیل الزامی است" )
+        .isEmail()
+        .withMessage( "ایمیل معتبر نیست" )
+        .normalizeEmail(),
+
     body( "password" )
+        .notEmpty()
+        .withMessage( "رمز عبور الزامی است" )
         .isLength( { min: 6 } )
-        .withMessage( "Password must be at least 6 characters" ),
+        .withMessage( "رمز عبور باید حداقل ۶ کاراکتر باشد" ),
 ];
 
-const loginValidation = [
-    body( "email" ).isEmail().withMessage( "Valid email is required" ),
-    body( "password" ).notEmpty().withMessage( "Password is required" ),
-];
+exports.loginValidation = [
+    body( "email" )
+        .trim()
+        .notEmpty()
+        .withMessage( "ایمیل الزامی است" )
+        .isEmail()
+        .withMessage( "ایمیل معتبر نیست" )
+        .normalizeEmail(),
 
-module.exports = { registerValidation, loginValidation };
+    body( "password" )
+        .notEmpty()
+        .withMessage( "رمز عبور الزامی است" ),
+];

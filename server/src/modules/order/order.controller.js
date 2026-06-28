@@ -1,35 +1,162 @@
-const asyncHandler = require( "../../utils/asyncHandler" );
-const orderService = require( "./order.service" );
+const Order = require( "../../models/Order" );
+const Product = require( "../../models/Product" );
 
-const createOrder = asyncHandler( async ( req, res ) => {
-    const order = await orderService.createOrder( req.user._id, req.body );
-    res.status( 201 ).json( { order } );
-} );
+exports.createOrder = async ( req, res, next ) => {
+    try {
+        const {
+            orderItems,
+            shippingAddress,
+            paymentMethod,
+            itemsPrice,
+            shippingPrice,
+            taxPrice,
+            totalPrice,
+        } = req.body;
 
-const getMyOrders = asyncHandler( async ( req, res ) => {
-    const orders = await orderService.getMyOrders( req.user._id );
-    res.json( { orders } );
-} );
+        if ( !orderItems || orderItems.length === 0 ) {
+            return res.status( 400 ).json( {
+                message: "سبد خرید خالی است",
+            } );
+        }
 
-const getAllOrders = asyncHandler( async ( req, res ) => {
-    const orders = await orderService.getAllOrders();
-    res.json( { orders } );
-} );
+        for ( const item of orderItems ) {
+            const product = await Product.findById( item.product );
 
-const getOrderById = asyncHandler( async ( req, res ) => {
-    const order = await orderService.getOrderById( req.params.id );
-    res.json( { order } );
-} );
+            if ( !product ) {
+                return res.status( 404 ).json( {
+                    message: `محصول ${ item.name } پیدا نشد`,
+                } );
+            }
 
-const updateOrder = asyncHandler( async ( req, res ) => {
-    const order = await orderService.updateOrder( req.params.id, req.body );
-    res.json( { order } );
-} );
+            if ( product.countInStock < item.qty ) {
+                return res.status( 400 ).json( {
+                    message: `موجودی ${ product.name } کافی نیست`,
+                } );
+            }
+        }
 
-module.exports = {
-    createOrder,
-    getMyOrders,
-    getAllOrders,
-    getOrderById,
-    updateOrder,
+        const order = await Order.create( {
+            user: req.user._id,
+            orderItems,
+            shippingAddress,
+            paymentMethod,
+            itemsPrice,
+            shippingPrice,
+            taxPrice,
+            totalPrice,
+        } );
+
+        for ( const item of orderItems ) {
+            await Product.findByIdAndUpdate( item.product, {
+                $inc: { countInStock: -item.qty },
+            } );
+        }
+
+        return res.status( 201 ).json( {
+            message: "سفارش با موفقیت ثبت شد",
+            order,
+        } );
+    } catch ( error ) {
+        next( error );
+    }
+};
+
+exports.getMyOrders = async ( req, res, next ) => {
+    try {
+        const orders = await Order.find( { user: req.user._id } )
+            .sort( { createdAt: -1 } )
+            .lean();
+
+        return res.json( {
+            orders,
+        } );
+    } catch ( error ) {
+        next( error );
+    }
+};
+
+exports.getAllOrders = async ( req, res, next ) => {
+    try {
+        const orders = await Order.find( {} )
+            .populate( "user", "name email" )
+            .sort( { createdAt: -1 } )
+            .lean();
+
+        return res.json( {
+            orders,
+        } );
+    } catch ( error ) {
+        next( error );
+    }
+};
+
+exports.getOrderById = async ( req, res, next ) => {
+    try {
+        const order = await Order.findById( req.params.id ).populate(
+            "user",
+            "name email"
+        );
+
+        if ( !order ) {
+            return res.status( 404 ).json( {
+                message: "سفارش پیدا نشد",
+            } );
+        }
+
+        const isOwner = order.user._id.toString() === req.user._id.toString();
+        const isAdmin = req.user.role === "admin";
+
+        if ( !isOwner && !isAdmin ) {
+            return res.status( 403 ).json( {
+                message: "اجازه دسترسی به این سفارش را ندارید",
+            } );
+        }
+
+        return res.json( {
+            order,
+        } );
+    } catch ( error ) {
+        next( error );
+    }
+};
+
+exports.updateOrder = async ( req, res, next ) => {
+    try {
+        const order = await Order.findById( req.params.id );
+
+        if ( !order ) {
+            return res.status( 404 ).json( {
+                message: "سفارش پیدا نشد",
+            } );
+        }
+
+        const {
+            status,
+            isPaid,
+            isDelivered,
+        } = req.body;
+
+        if ( status !== undefined ) {
+            order.status = status;
+        }
+
+        if ( isPaid !== undefined ) {
+            order.isPaid = isPaid;
+            order.paidAt = isPaid ? new Date() : undefined;
+        }
+
+        if ( isDelivered !== undefined ) {
+            order.isDelivered = isDelivered;
+            order.deliveredAt = isDelivered ? new Date() : undefined;
+        }
+
+        const updatedOrder = await order.save();
+
+        return res.json( {
+            message: "سفارش با موفقیت بروزرسانی شد",
+            order: updatedOrder,
+        } );
+    } catch ( error ) {
+        next( error );
+    }
 };

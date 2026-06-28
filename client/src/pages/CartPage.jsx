@@ -1,44 +1,96 @@
 import { Link, useNavigate } from "react-router-dom";
+import { FiTrash2 } from "react-icons/fi";
 import { useCart } from "../hooks/useCart";
 
 export default function CartPage () {
   const navigate = useNavigate();
   const { items, removeItem, updateQuantity, getSubtotal } = useCart();
 
-  return (
-    <div className="page">
-      <h1>Cart</h1>
+  if ( items.length === 0 ) {
+    return (
+      <div className="page empty-cart">
+        <h2>سبد خرید خالی است</h2>
+        <Link to="/products" className="go-shopping">
+          مشاهده محصولات
+        </Link>
+      </div>
+    );
+  }
 
-      { items.length === 0 ? (
-        <p>
-          Your cart is empty. <Link to="/products">Go shopping</Link>
-        </p>
-      ) : (
-        <>
+  return (
+    <div className="page cart-page">
+
+      <h1>سبد خرید</h1>
+
+      <div className="cart-grid">
+
+        <div className="cart-items">
+
           { items.map( ( item ) => (
-            <div key={ item._id } style={ { display: "flex", gap: 12, marginBottom: 16 } }>
+            <div key={ item._id } className="cart-item">
+
               <img
                 src={ item.image }
                 alt={ item.name }
-                style={ { width: 80, height: 80, objectFit: "cover" } }
               />
-              <div style={ { flex: 1 } }>
+
+              <div className="cart-item-info">
+
                 <h3>{ item.name }</h3>
-                <p>{ item.price }</p>
+
+                <div className="cart-item-price">
+                  { Number( item.price ).toLocaleString( "fa-IR" ) }
+                  <span> تومان</span>
+                </div>
+
                 <input
                   type="number"
                   min="1"
                   value={ item.quantity }
-                  onChange={ ( e ) => updateQuantity( item._id, Number( e.target.value ) ) }
+                  onChange={ ( e ) =>
+                    updateQuantity(
+                      item._id,
+                      Number( e.target.value )
+                    )
+                  }
                 />
+
               </div>
-              <button onClick={ () => removeItem( item._id ) }>Remove</button>
+
+              <button
+                className="remove-item"
+                onClick={ () => removeItem( item._id ) }
+              >
+                <FiTrash2 />
+              </button>
+
             </div>
           ) ) }
-          <h3>Subtotal: { getSubtotal() }</h3>
-          <button onClick={ () => navigate( "/checkout" ) }>Proceed to checkout</button>
-        </>
-      ) }
+
+        </div>
+
+        <div className="cart-summary">
+
+          <h3>خلاصه سفارش</h3>
+
+          <div className="summary-row">
+            <span>جمع کالاها</span>
+            <span>
+              { getSubtotal().toLocaleString( "fa-IR" ) } تومان
+            </span>
+          </div>
+
+          <button
+            className="checkout-btn"
+            onClick={ () => navigate( "/checkout" ) }
+          >
+            ادامه فرآیند خرید
+          </button>
+
+        </div>
+
+      </div>
+
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { FiLogOut } from "react-icons/fi";
 import { useAuth } from "../../hooks/useAuth";
 import { useCart } from "../../hooks/useCart";
 
@@ -8,19 +9,28 @@ export default function Navbar () {
 
     return (
         <nav className="nav">
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/products">Products</NavLink>
-            <NavLink to="/cart">Cart ({ getTotalItems() })</NavLink>
+            <NavLink to="/" end>خانه</NavLink>
+            <NavLink to="/products">محصولات</NavLink>
+            <NavLink to="/cart">سبد خرید ({ getTotalItems() })</NavLink>
+
             { isAuthenticated ? (
                 <>
-                    <NavLink to="/orders">Orders</NavLink>
-                    { user?.role === "admin" ? <NavLink to="/admin">Admin</NavLink> : null }
-                    <button onClick={ logout }>Logout</button>
+                    <NavLink to="/orders">سفارش‌ها</NavLink>
+                    <NavLink to="/profile">پروفایل</NavLink>
+
+                    { user?.role === "admin" ? (
+                        <NavLink to="/admin">ادمین</NavLink>
+                    ) : null }
+
+                    <button type="button" onClick={ logout } className="nav__logout">
+                        <FiLogOut />
+                        خروج
+                    </button>
                 </>
             ) : (
                 <>
-                    <NavLink to="/login">Login</NavLink>
-                    <NavLink to="/register">Register</NavLink>
+                    <NavLink to="/login">ورود</NavLink>
+                    <NavLink to="/register">ثبت‌نام</NavLink>
                 </>
             ) }
         </nav>

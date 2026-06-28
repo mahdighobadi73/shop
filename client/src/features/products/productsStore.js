@@ -1,85 +1,90 @@
 import { create } from "zustand";
-import { productsApi } from "./productsApi";
+import { productsApi } from "../../services/productService";
 
 export const useProductsStore = create( ( set ) => ( {
     products: [],
     currentProduct: null,
+    pagination: null,
+
     isLoading: false,
     error: null,
 
-    fetchProducts: async () => {
-        set( { isLoading: true, error: null } );
+    fetchProducts: async ( params = {} ) => {
         try {
-            const data = await productsApi.getAll();
-            const products = Array.isArray( data ) ? data : data.products || [];
-            set( { products, isLoading: false } );
-            return products;
+            set( { isLoading: true, error: null } );
+
+            const res = await productsApi.getAll( params );
+
+            set( {
+                products: res.products,
+                pagination: res.pagination,
+                isLoading: false,
+            } );
         } catch ( error ) {
-            set( { isLoading: false, error: error.message } );
-            throw error;
+            set( {
+                error: error.message || "خطا در دریافت محصولات",
+                isLoading: false,
+            } );
         }
     },
 
     fetchProductById: async ( id ) => {
-        set( { isLoading: true, error: null } );
         try {
-            const data = await productsApi.getById( id );
-            const product = data?.product || data;
-            set( { currentProduct: product, isLoading: false } );
-            return product;
+            set( { isLoading: true } );
+
+            const res = await productsApi.getById( id );
+
+            set( {
+                currentProduct: res.product,
+                isLoading: false,
+            } );
         } catch ( error ) {
-            set( { isLoading: false, error: error.message } );
-            throw error;
+            set( {
+                error: error.message,
+                isLoading: false,
+            } );
         }
     },
 
-    createProduct: async ( payload ) => {
-        set( { isLoading: true, error: null } );
+    createProduct: async ( data ) => {
         try {
-            const data = await productsApi.create( payload );
-            const created = data?.product || data;
+            const res = await productsApi.create( data );
+
             set( ( state ) => ( {
-                products: [ created, ...state.products ],
-                isLoading: false,
+                products: [ res.product, ...state.products ],
             } ) );
-            return created;
+
+            return res.product;
         } catch ( error ) {
-            set( { isLoading: false, error: error.message } );
-            throw error;
+            set( { error: error.message } );
         }
     },
 
-    updateProduct: async ( id, payload ) => {
-        set( { isLoading: true, error: null } );
+    updateProduct: async ( id, data ) => {
         try {
-            const data = await productsApi.update( id, payload );
-            const updated = data?.product || data;
+            const res = await productsApi.update( id, data );
+
             set( ( state ) => ( {
-                products: state.products.map( ( p ) => ( p._id === id ? updated : p ) ),
-                currentProduct:
-                    state.currentProduct && state.currentProduct._id === id
-                        ? updated
-                        : state.currentProduct,
-                isLoading: false,
+                products: state.products.map( ( p ) =>
+                    p._id === id ? res.product : p
+                ),
             } ) );
-            return updated;
+
+            return res.product;
         } catch ( error ) {
-            set( { isLoading: false, error: error.message } );
-            throw error;
+            set( { error: error.message } );
         }
     },
 
     deleteProduct: async ( id ) => {
-        set( { isLoading: true, error: null } );
         try {
             await productsApi.remove( id );
+
             set( ( state ) => ( {
                 products: state.products.filter( ( p ) => p._id !== id ),
-                isLoading: false,
             } ) );
         } catch ( error ) {
-            set( { isLoading: false, error: error.message } );
-            throw error;
+            set( { error: error.message } );
         }
     },
 } ) );

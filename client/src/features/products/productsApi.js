@@ -1,10 +1,28 @@
 import api from "../../services/api";
 
 export const productsApi = {
-    getAll: () => api.get( "/products" ).then( ( res ) => res.data ),
-    getById: ( id ) => api.get( `/products/${ id }` ).then( ( res ) => res.data ),
-    create: ( payload ) => api.post( "/admin/products", payload ).then( ( res ) => res.data ),
-    update: ( id, payload ) =>
-        api.put( `/admin/products/${ id }`, payload ).then( ( res ) => res.data ),
-    remove: ( id ) => api.delete( `/admin/products/${ id }` ).then( ( res ) => res.data ),
+    getAll: async ( params = {} ) => {
+        const { data } = await api.get( "/products", { params } );
+        return data;
+    },
+
+    getById: async ( id ) => {
+        const { data } = await api.get( `/products/${ id }` );
+        return data;
+    },
+
+    create: async ( payload ) => {
+        const { data } = await api.post( "/products", payload );
+        return data;
+    },
+
+    update: async ( id, payload ) => {
+        const { data } = await api.put( `/products/${ id }`, payload );
+        return data;
+    },
+
+    remove: async ( id ) => {
+        const { data } = await api.delete( `/products/${ id }` );
+        return data;
+    },
 };

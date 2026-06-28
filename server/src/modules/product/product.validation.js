@@ -1,14 +1,55 @@
 const { body } = require( "express-validator" );
 
-const productValidation = [
-    body( "name" ).notEmpty().withMessage( "Name is required" ),
-    body( "description" ).notEmpty().withMessage( "Description is required" ),
-    body( "price" ).isNumeric().withMessage( "Price must be a number" ),
-    body( "image" ).notEmpty().withMessage( "Image is required" ),
-    body( "category" ).notEmpty().withMessage( "Category is required" ),
-    body( "countInStock" )
-        .isNumeric()
-        .withMessage( "Count in stock must be a number" ),
-];
+exports.productValidation = [
+    body( "name" )
+        .trim()
+        .notEmpty()
+        .withMessage( "نام محصول الزامی است" )
+        .isLength( { min: 2 } )
+        .withMessage( "نام محصول باید حداقل ۲ کاراکتر باشد" ),
 
-module.exports = { productValidation };
+    body( "description" )
+        .trim()
+        .notEmpty()
+        .withMessage( "توضیحات محصول الزامی است" ),
+
+    body( "price" )
+        .notEmpty()
+        .withMessage( "قیمت محصول الزامی است" )
+        .isNumeric()
+        .withMessage( "قیمت باید عددی باشد" )
+        .custom( ( value ) => Number( value ) >= 0 )
+        .withMessage( "قیمت نمی‌تواند منفی باشد" ),
+
+    body( "image" )
+        .trim()
+        .notEmpty()
+        .withMessage( "تصویر محصول الزامی است" ),
+
+    body( "category" )
+        .trim()
+        .notEmpty()
+        .withMessage( "دسته‌بندی محصول الزامی است" ),
+
+    body( "countInStock" )
+        .optional()
+        .isNumeric()
+        .withMessage( "موجودی باید عددی باشد" )
+        .custom( ( value ) => Number( value ) >= 0 )
+        .withMessage( "موجودی نمی‌تواند منفی باشد" ),
+
+    body( "rating" )
+        .optional()
+        .isNumeric()
+        .withMessage( "امتیاز باید عددی باشد" ),
+
+    body( "numReviews" )
+        .optional()
+        .isNumeric()
+        .withMessage( "تعداد نقد و بررسی باید عددی باشد" ),
+
+    body( "isFeatured" )
+        .optional()
+        .isBoolean()
+        .withMessage( "وضعیت ویژه بودن باید true یا false باشد" ),
+];

@@ -8,6 +8,7 @@ export default function CheckoutPage () {
     const { createOrder, isLoading, error } = useOrders();
 
     const handlePlaceOrder = async () => {
+
         const payload = {
             orderItems: items.map( ( item ) => ( {
                 product: item._id,
@@ -35,13 +36,33 @@ export default function CheckoutPage () {
     };
 
     return (
-        <div className="page">
-            <h1>Checkout</h1>
-            <p>Total: { getSubtotal() }</p>
-            { error ? <p>{ error }</p> : null }
-            <button onClick={ handlePlaceOrder } disabled={ isLoading || items.length === 0 }>
-                { isLoading ? "Placing order..." : "Place order" }
-            </button>
+        <div className="page checkout-page">
+
+            <h1>تایید سفارش</h1>
+
+            <div className="checkout-summary">
+
+                <div className="summary-row">
+                    <span>جمع کالاها</span>
+                    <span>
+                        { getSubtotal().toLocaleString( "fa-IR" ) } تومان
+                    </span>
+                </div>
+
+                { error && (
+                    <p className="checkout-error">{ error }</p>
+                ) }
+
+                <button
+                    className="place-order-btn"
+                    onClick={ handlePlaceOrder }
+                    disabled={ isLoading || items.length === 0 }
+                >
+                    { isLoading ? "در حال ثبت سفارش..." : "ثبت سفارش" }
+                </button>
+
+            </div>
+
         </div>
     );
 }

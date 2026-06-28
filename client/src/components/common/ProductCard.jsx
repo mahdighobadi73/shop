@@ -1,28 +1,58 @@
-import { Link } from 'react-router-dom'
-import { useCartStore } from '../../store/useCartStore.js'
-import Button from '../ui/Button.jsx'
+import { Link } from "react-router-dom";
+import { FiShoppingCart, FiEye } from "react-icons/fi";
+import { useCart } from "../../hooks/useCart";
 
 export default function ProductCard ( { product } ) {
-    const addItem = useCartStore( ( state ) => state.addItem )
+    const { addItem } = useCart();
+    const productId = product._id || product.id;
 
     return (
         <article className="product-card">
-            <Link to={ `/products/${ product.id }` } className="product-image-wrap">
-                <img src={ product.image } alt={ product.name } className="product-image" />
+            <Link to={ `/products/${ productId }` } className="product-card__image-wrap">
+                <img
+                    src={ product.image }
+                    alt={ product.name }
+                    className="product-card__image"
+                    loading="lazy"
+                />
+
+                { product.discount ? (
+                    <span className="product-card__discount">
+                        { product.discount }٪
+                    </span>
+                ) : null }
             </Link>
 
-            <div className="product-content">
-                <h3>{ product.name }</h3>
-                <p>{ product.category }</p>
-                <strong>{ product.price.toLocaleString( 'fa-IR' ) } تومان</strong>
+            <div className="product-card__body">
+                <Link to={ `/products/${ productId }` } className="product-card__title">
+                    { product.name }
+                </Link>
 
-                <div className="product-actions">
-                    <Link to={ `/products/${ product.id }` } className="link-btn">
-                        مشاهده
-                    </Link>
-                    <Button onClick={ () => addItem( product, 1 ) }>افزودن</Button>
+                { product.category ? (
+                    <span className="product-card__category">{ product.category }</span>
+                ) : null }
+
+                <div className="product-card__footer">
+                    <strong className="product-card__price">
+                        { Number( product.price ).toLocaleString( "fa-IR" ) }
+                        <span> تومان</span>
+                    </strong>
+
+                    <button
+                        type="button"
+                        className="product-card__add"
+                        onClick={ () => addItem( product, 1 ) }
+                        aria-label="افزودن به سبد خرید"
+                    >
+                        <FiShoppingCart />
+                    </button>
                 </div>
+
+                <Link to={ `/products/${ productId }` } className="product-card__details">
+                    <FiEye />
+                    مشاهده جزئیات
+                </Link>
             </div>
         </article>
-    )
+    );
 }

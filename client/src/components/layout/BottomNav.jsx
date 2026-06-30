@@ -9,6 +9,7 @@ import {
 } from "react-icons/fi";
 import { useAuth } from "../../hooks/useAuth";
 import { useCart } from "../../hooks/useCart";
+import "./BottomNav.css"
 
 export default function BottomNav () {
     const { isAuthenticated } = useAuth();

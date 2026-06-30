@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 import { useAuth } from "../../hooks/useAuth";
 import { useCart } from "../../hooks/useCart";
+import "./Navbar.css"
 
 export default function Navbar () {
     const { user, isAuthenticated, logout } = useAuth();

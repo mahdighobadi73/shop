@@ -1,87 +1,229 @@
+/* ===========================
+   Layout
+=========================== */
+
 .app-shell {
     min-height: 100vh;
-    background: #f4f6f8;
-    color: #111827;
+    display: flex;
+    flex-direction: column;
+    background: #f5f5f7;
 }
 
-.topbar {
+.app-main {
+    flex: 1;
+    width: min(100%, 1200px);
+    margin: 0 auto;
+    padding: 20px 16px;
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.app-header__top {
+    width: min(100%, 1200px);
+    margin: 0 auto;
+    padding: 14px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 24px;
-    background: #ffffff;
-    border-bottom: 1px solid #e5e7eb;
-    position: sticky;
-    top: 0;
-    z-index: 10;
 }
+
+/* ===========================
+   Logo
+=========================== */
 
 .brand {
-    font-size: 20px;
-    font-weight: 700;
-    color: #111827;
-    text-decoration: none;
-}
-
-.nav {
     display: flex;
-    gap: 14px;
     align-items: center;
-    flex-wrap: wrap;
+    gap: 10px;
+    color: #111827;
+    font-size: 1.2rem;
+    font-weight: 900;
 }
 
-.nav a {
-    display: inline-flex;
+.brand__mark {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 6px;
-    color: #374151;
-    text-decoration: none;
-    padding: 8px 10px;
-    border-radius: 8px;
-}
 
-.nav a.active {
-    background: #111827;
-    color: #ffffff;
-}
+    background: linear-gradient(135deg, #ef4056, #ff6f87);
 
-.cart-link {
-    position: relative;
-}
-
-.badge {
-    background: #ef4444;
     color: #fff;
-    border-radius: 999px;
-    font-size: 12px;
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    box-shadow: 0 8px 18px rgba(239, 64, 86, .25);
+}
+
+.brand__text {
+    letter-spacing: -.5px;
+}
+
+/* ===========================
+   Cart Button
+=========================== */
+
+.header-cart {
+    position: relative;
+
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 12px;
+
+    background: #f3f4f6;
+    color: #374151;
+
+    transition: .25s;
+}
+
+.header-cart:hover {
+    background: #ef4056;
+    color: white;
+}
+
+.header-cart svg {
+    font-size: 1.3rem;
+}
+
+.header-cart__badge {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+
     min-width: 20px;
     height: 20px;
-    display: inline-flex;
-    align-items: center;
+
+    padding: 0 5px;
+
+    border-radius: 999px;
+
+    background: #ef4056;
+    color: white;
+
+    display: flex;
     justify-content: center;
-    margin-left: 4px;
+    align-items: center;
+
+    font-size: .7rem;
+    font-weight: bold;
+
+    border: 2px solid white;
 }
 
-.page {
-    padding: 24px;
+/* ===========================
+   Search Box
+=========================== */
+
+.search-box {
+    width: min(100%, 1200px);
+
+    margin: 0 auto;
+    margin-bottom: 14px;
+
+    padding: 0 16px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    height: 48px;
+
+    background: #f3f4f6;
+
+    border: 1px solid transparent;
+
+    border-radius: 14px;
+
+    transition: .25s;
 }
 
-.navbar {
-    display: none;
+.search-box:hover {
+    background: #eceff3;
 }
 
-@media(min-width:768px) {
+.search-box:focus-within {
+    background: white;
+    border-color: #ef4056;
+}
 
-    .navbar {
+.search-box svg {
+    font-size: 1.2rem;
+    color: #9ca3af;
+}
 
-        display: flex;
+.search-box input {
+    flex: 1;
 
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #111827;
+    font-size: .95rem;
+}
+
+.search-box input::placeholder {
+    color: #9ca3af;
+}
+
+/* ===========================
+   Desktop Navbar
+=========================== */
+
+.nav {
+    width: min(100%, 1200px);
+    margin: 0 auto;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width: 900px) {
+
+    .app-main {
+        padding: 16px;
+        padding-bottom: 90px;
     }
 
-    .bottom-nav {
+    .brand__text {
+        font-size: 1.05rem;
+    }
 
-        display: none;
+    .search-box {
+        margin-inline: 16px;
+        width: auto;
+    }
 
+}
+
+@media (min-width: 901px) {
+
+    .app-header {
+        padding-bottom: 10px;
+    }
+
+    .search-box {
+        margin-bottom: 16px;
     }
 
 }

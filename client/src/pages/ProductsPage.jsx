@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useProducts } from "../hooks/useProducts";
+import "./ProductsPage.css"
 
 const ProductsPage = () => {
     const { products, fetchProducts, isLoading, error } = useProducts();
@@ -85,6 +86,7 @@ const ProductsPage = () => {
             <div style={ { display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "20px" } }>
                 { products?.map( ( product ) => (
                     <div key={ product._id } style={ { border: "1px solid #ddd", padding: "10px" } }>
+                        <img src={product.image} alt={product.name}/>
                         <h4>{ product.name }</h4>
                         <p>{ product.price } تومان</p>
                         <p>{ product.category }</p>

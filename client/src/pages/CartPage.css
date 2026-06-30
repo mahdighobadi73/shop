@@ -1,0 +1,255 @@
+.cart-page h1 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    margin: 0;
+    letter-spacing: -0.03em;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    padding: 40px 20px;
+    gap: 10px;
+}
+
+.empty-cart h2 {
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
+.go-shopping {
+    margin-top: 10px;
+    padding: 10px 14px;
+
+    border-radius: 14px;
+    background: #ef4056;
+    color: #fff;
+
+    font-weight: 800;
+}
+
+/* =========================
+   GRID LAYOUT
+========================= */
+
+.cart-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+/* =========================
+   CART ITEM LIST
+========================= */
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* =========================
+   CART ITEM CARD
+========================= */
+
+.cart-item {
+    display: flex;
+    gap: 12px;
+
+    padding: 12px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+
+    background: #fff;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease;
+}
+
+.cart-item:hover {
+    transform: translateY(-2px);
+}
+
+.cart-item img {
+    width: 78px;
+    height: 78px;
+
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* =========================
+   ITEM INFO
+========================= */
+
+.cart-item-info {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.cart-item-info h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 800;
+
+    line-height: 1.5;
+    color: #1f2937;
+}
+
+.cart-item-price {
+    font-weight: 900;
+    color: #ef4056;
+}
+
+.cart-item-price span {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-right: 4px;
+}
+
+/* =========================
+   QUANTITY INPUT
+========================= */
+
+.cart-item-info input {
+    width: 70px;
+    height: 34px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    padding: 0 8px;
+
+    font-weight: 800;
+    text-align: center;
+
+    outline: none;
+    transition: border 0.2s ease;
+}
+
+.cart-item-info input:focus {
+    border-color: #ef4056;
+}
+
+/* =========================
+   REMOVE BUTTON
+========================= */
+
+.remove-item {
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+    place-items: center;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #fff1f2;
+    color: #ef4056;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.remove-item:hover {
+    background: #ef4056;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+/* =========================
+   SUMMARY BOX
+========================= */
+
+.cart-summary {
+    position: sticky;
+    top: 16px;
+
+    padding: 16px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+
+    background: #fff;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.cart-summary h3 {
+    margin: 0 0 12px;
+    font-size: 1.1rem;
+    font-weight: 900;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+
+    font-weight: 800;
+
+    margin-bottom: 14px;
+    color: #1f2937;
+}
+
+/* =========================
+   CHECKOUT BUTTON
+========================= */
+
+.checkout-btn {
+    width: 100%;
+    height: 44px;
+
+    border: none;
+    border-radius: 14px;
+
+    background: #ef4056;
+    color: #fff;
+
+    font-weight: 900;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.checkout-btn:hover {
+    background: #d92f46;
+    transform: translateY(-1px);
+}
+
+/* =========================
+   RESPONSIVE DESKTOP
+========================= */
+
+@media (min-width: 900px) {
+    .cart-grid {
+        grid-template-columns: 2fr 1fr;
+        align-items: start;
+    }
+
+    .cart-item {
+        padding: 14px;
+    }
+
+    .cart-item img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .cart-summary {
+        position: sticky;
+        top: 100px;
+    }
+}

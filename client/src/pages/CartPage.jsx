@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FiTrash2 } from "react-icons/fi";
 import { useCart } from "../hooks/useCart";
+import "./CartPage.css"
 
 export default function CartPage () {
   const navigate = useNavigate();

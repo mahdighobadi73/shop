@@ -47,7 +47,7 @@ export default function ProductDetailsPage () {
                         </div>
 
                         <div className="product-stock">
-                            موجودی: { currentProduct.countInStock }
+                            { currentProduct.countInStock } عدد در انبار
                         </div>
 
                     </div>

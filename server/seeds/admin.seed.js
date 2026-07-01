@@ -22,14 +22,14 @@ const run = async () => {
         console.log( "✅ MongoDB connected" );
 
         const exists = await User.findOne( {
-            email: "mahdi.ghobadi73@gmail.com",
+            email: "mahdi@gmail.com",
         } );
 
         if ( !exists ) {
             await User.create( {
                 name: "Admin",
-                email: "mahdi.ghobadi73@gmail.com",
-                password: "123456",
+                email: "mahdi@gmail.com",
+                password: "111111",
                 role: "admin",
             } );
 

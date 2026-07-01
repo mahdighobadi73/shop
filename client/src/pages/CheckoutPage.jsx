@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../hooks/useCart";
-import { useOrders } from "../hooks/useOrders";
+import { useCart } from "../features/cart/useCart";
+import { useOrders } from "../features/orders/useOrders";
 
 export default function CheckoutPage () {
     const navigate = useNavigate();

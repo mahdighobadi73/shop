@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useOrders } from "../hooks/useOrders";
+import { useOrders } from "../features/orders/useOrders";
 
 export default function OrdersPage () {
     const { orders, fetchMyOrders, isLoading, error } = useOrders();
@@ -18,7 +18,7 @@ export default function OrdersPage () {
                 <p>No orders yet.</p>
             ) : (
                 orders.map( ( order ) => (
-                    <div key={ order._id } style={ { border: "1px solid #ddd", padding: 16, marginBottom: 12 } }>
+                    <div key={ order._id }>
                         <p>Order ID: { order._id }</p>
                         <p>Status: { order.status }</p>
                         <p>Total: { order.totalPrice }</p>

@@ -1,0 +1,102 @@
+.profile-page {
+    min-height: 100vh;
+    padding: 20px 16px 90px;
+    background: #f8f8f8;
+}
+
+.profile-card {
+    background: #fff;
+    border: 1px solid #ececec;
+    border-radius: 22px;
+    padding: 22px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.profile-avatar {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #111;
+    color: white;
+    font-size: 22px;
+    font-weight: 600;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-header h2 {
+    font-size: 18px;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.profile-header span {
+    font-size: 13px;
+    color: #888;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.profile-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border: 1px solid #efefef;
+    border-radius: 16px;
+}
+
+.profile-item svg {
+    font-size: 18px;
+    color: #777;
+}
+
+.profile-item small {
+    display: block;
+    font-size: 12px;
+    color: #999;
+}
+
+.profile-item strong {
+    font-size: 14px;
+    font-weight: 500;
+    color: #222;
+}
+
+.profile-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 22px 0;
+}
+
+.stat-card {
+    padding: 16px 10px;
+    border-radius: 16px;
+    background: #fafafa;
+    border: 1px solid #efefef;
+    text-align: center;
+}
+
+.stat-card h3 {
+    font-size: 22px;
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+.stat-card span {
+    font-size: 12px;
+    color: #888;
+}

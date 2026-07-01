@@ -9,8 +9,9 @@ import {
 } from "react-icons/fa";
 
 import Button from "../components/ui/Button";
-import { useAuth } from "../hooks/useAuth";
-import "../assets/styles/auth.css";
+import { useAuth } from "../features/auth/useAuth";
+
+import "./RegisterPage.css";
 
 export default function RegisterPage () {
     const navigate = useNavigate();

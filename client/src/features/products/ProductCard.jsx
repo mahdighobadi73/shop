@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiShoppingCart, FiEye, FiHeart } from "react-icons/fi";
-import { useCart } from "../../hooks/useCart";
+import { useCart } from "../cart/useCart";
 import "./ProductCard.css";
 
 export default function ProductCard ( { product, loading = false } ) {

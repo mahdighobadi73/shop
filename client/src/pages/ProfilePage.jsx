@@ -2,9 +2,9 @@ import { FiMail, FiUser, FiShield, FiLogOut } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
 import Button from "../components/ui/Button";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../features/auth/useAuth";
+import "./ProfilePage.css";
 
-import "../assets/styles/profile.css";
 
 export default function ProfilePage () {
 

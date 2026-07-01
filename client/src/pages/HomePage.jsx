@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowLeft, FiTruck, FiShield, FiRefreshCw } from "react-icons/fi";
-import { useProducts } from "../hooks/useProducts";
-import ProductCard from "../components/common/ProductCard";
+import { useProducts } from "../features/products/useProducts";
+import ProductCard from "../features/products/ProductCard";
 
 export default function HomePage () {
     const { products, fetchProducts, isLoading, error } = useProducts();

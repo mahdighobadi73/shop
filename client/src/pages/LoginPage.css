@@ -1,0 +1,240 @@
+/* =========================
+   Auth Page
+========================= */
+
+.auth-page {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: start;
+    justify-content: center;
+
+    padding: 24px;
+
+    background: linear-gradient(135deg,
+            #f8fafc,
+            #eef2ff);
+}
+
+/* =========================
+   Card
+========================= */
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+
+    background: white;
+
+    padding: 32px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, .08),
+        0 4px 10px rgba(0, 0, 0, .05);
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* =========================
+   Logo
+========================= */
+
+.auth-logo {
+    width: 60px;
+    height: 60px;
+
+    margin: 0 auto;
+
+    border-radius: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+
+    background: linear-gradient(135deg,
+            #ef4056,
+            #ff6f87);
+
+    color: white;
+
+    box-shadow: 0 8px 20px rgba(239, 64, 86, .25);
+}
+
+/* =========================
+   Heading
+========================= */
+
+.auth-card h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 6px 0 0;
+}
+
+.auth-card p {
+    text-align: center;
+    font-size: .9rem;
+    color: #6b7280;
+    margin: 0 0 10px;
+}
+
+/* =========================
+   Form
+========================= */
+
+.auth-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* =========================
+   Input Group
+========================= */
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-group label {
+    font-size: .85rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+/* =========================
+   Input Wrapper
+========================= */
+
+.auth-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 0 12px;
+
+    height: 46px;
+
+    border-radius: 12px;
+
+    background: #f9fafb;
+
+    border: 1px solid #e5e7eb;
+
+    transition: .25s;
+}
+
+.auth-input:hover {
+    background: #f3f4f6;
+}
+
+.auth-input:focus-within {
+    border-color: #ef4056;
+    background: white;
+
+    box-shadow: 0 0 0 3px rgba(239, 64, 86, .12);
+}
+
+.auth-input svg {
+    color: #9ca3af;
+    font-size: 0.95rem;
+}
+
+.auth-input input {
+    flex: 1;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    font-size: .9rem;
+}
+
+/* =========================
+   Password Eye Button
+========================= */
+
+.eye-btn {
+    border: none;
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    color: #9ca3af;
+
+    transition: .2s;
+}
+
+.eye-btn:hover {
+    color: #374151;
+}
+
+/* =========================
+   Error Messages
+========================= */
+
+.input-group small {
+    font-size: .75rem;
+    color: #ef4444;
+}
+
+.auth-error {
+    padding: 10px 12px;
+
+    background: #fee2e2;
+    color: #b91c1c;
+
+    border-radius: 8px;
+
+    font-size: .85rem;
+}
+
+/* =========================
+   Footer
+========================= */
+
+.auth-footer {
+    text-align: center;
+
+    font-size: .9rem;
+
+    color: #6b7280;
+}
+
+.auth-footer a {
+    margin-right: 6px;
+
+    color: #ef4056;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 480px) {
+
+    .auth-card {
+        padding: 24px;
+    }
+
+}

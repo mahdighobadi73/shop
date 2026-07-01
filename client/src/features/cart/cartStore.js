@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { cartStorage } from "../../services/cartStorage";
+import { cartStorage } from "./cartStorage";
 
 export const useCartStore = create( ( set, get ) => ( {
     items: cartStorage.load(),

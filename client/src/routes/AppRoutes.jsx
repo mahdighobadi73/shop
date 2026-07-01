@@ -12,7 +12,12 @@ import OrdersPage from "../pages/OrdersPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminRoute from "./AdminRoute";
-import AdminPage from "../features/admin/AdminPage";
+import AdminLayout from "../features/admin/AdminLayout"
+import Dashboard from "../features/admin/Dashboard"
+import AdminProducts from "../features/admin/AdminProducts"
+import AdminOrders from "../features/admin/AdminOrders"
+import AdminUsers from "../features/admin/AdminUsers"
+
 
 export default function AppRoutes () {
     return (
@@ -52,10 +57,15 @@ export default function AppRoutes () {
                     path="admin"
                     element={
                         <AdminRoute>
-                            <AdminPage />
+                            <AdminLayout />
                         </AdminRoute>
                     }
-                />
+                >
+                    <Route index element={ <Dashboard /> } />
+                    <Route path="products" element={ <AdminProducts /> } />
+                    <Route path="orders" element={ <AdminOrders /> } />
+                    <Route path="users" element={ <AdminUsers /> } />
+                </Route>
                 <Route path="*" element={ <NotFoundPage /> } />
             </Route>
         </Routes>

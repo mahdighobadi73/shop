@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useProducts } from "../../hooks/useProducts"; // مسیر هوک را در صورت نیاز اصلاح کن
+import { useProducts } from "../features/products/useProducts"; 
 import "./AddProduct.css";
 
 const AddProduct = () => {

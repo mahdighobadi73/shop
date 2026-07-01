@@ -1,33 +1,158 @@
-.product-card__cart {
-    flex: 1;
-    height: 44px;
-    border: none;
+/* =========================
+   Base Button
+========================= */
+
+.btn {
+    height: 48px;
+
+    padding: 0 18px;
+
     border-radius: 12px;
 
-    background: linear-gradient(135deg,
-            var(--color-primary),
-            var(--color-primary-dark));
+    border: none;
 
-    color: white;
-    font-weight: 700;
-
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
 
+    font-size: .95rem;
+    font-weight: 600;
+
     cursor: pointer;
 
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    transition:
+        transform .08s ease,
+        box-shadow .2s ease,
+        background .2s ease,
+        color .2s ease;
 
-    transition: all 0.2s ease;
+    user-select: none;
 }
 
-.product-card__cart:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+/* =========================
+   Full width
+========================= */
+
+.btn-block {
+    width: 100%;
 }
 
-.product-card__cart:active {
-    transform: scale(0.98);
+/* =========================
+   Primary
+========================= */
+
+.btn-primary {
+    background: linear-gradient(135deg,
+            #ef4056,
+            #ff6f87);
+
+    color: white;
+
+    box-shadow: 0 8px 20px rgba(239, 64, 86, .25);
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-1px);
+
+    box-shadow: 0 10px 25px rgba(239, 64, 86, .35);
+}
+
+.btn-primary:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+/* =========================
+   Outline
+========================= */
+
+.btn-outline {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    color: #374151;
+}
+
+.btn-outline:hover:not(:disabled) {
+    background: #f9fafb;
+}
+
+/* =========================
+   Ghost
+========================= */
+
+.btn-ghost {
+    background: transparent;
+
+    color: #374151;
+}
+
+.btn-ghost:hover:not(:disabled) {
+    background: #f3f4f6;
+}
+
+/* =========================
+   Danger
+========================= */
+
+.btn-danger {
+    background: #ef4444;
+    color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background: #dc2626;
+}
+
+/* =========================
+   Loading State
+========================= */
+
+.btn-loading {
+    pointer-events: none;
+}
+
+/* =========================
+   Disabled
+========================= */
+
+.btn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* =========================
+   Spinner
+========================= */
+
+.spinner {
+    width: 16px;
+    height: 16px;
+
+    border: 2px solid rgba(255, 255, 255, .4);
+    border-top-color: white;
+
+    border-radius: 50%;
+
+    animation: spin .6s linear infinite;
+}
+
+/* outline spinner */
+
+.btn-outline .spinner,
+.btn-ghost .spinner {
+    border: 2px solid rgba(0, 0, 0, .15);
+    border-top-color: #374151;
+}
+
+/* =========================
+   Animation
+========================= */
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }

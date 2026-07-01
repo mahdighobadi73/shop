@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FiShoppingCart, FiTruck, FiShield } from "react-icons/fi";
-import { useProducts } from "../hooks/useProducts";
-import { useCart } from "../hooks/useCart";
+import { useProducts } from "../features/products/useProducts";
+import { useCart } from "../features/cart/useCart";
 
 export default function ProductDetailsPage () {
     const { id } = useParams();

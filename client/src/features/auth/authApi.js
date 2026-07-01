@@ -1,23 +1,11 @@
 import api from "../../services/api";
 
 export const authApi = {
-  register: async ( payload ) => {
-    const { data } = await api.post( "/auth/register", payload );
-    return data;
-  },
+  register: ( payload ) => api.post( "/auth/register", payload ),
 
-  login: async ( payload ) => {
-    const { data } = await api.post( "/auth/login", payload );
-    return data;
-  },
+  login: ( payload ) => api.post( "/auth/login", payload ),
 
-  me: async () => {
-    const { data } = await api.get( "/auth/me" );
-    return data;
-  },
+  logout: () => api.post( "/auth/logout" ),
 
-  logout: async () => {
-    const { data } = await api.post( "/auth/logout" );
-    return data;
-  },
+  me: () => api.get( "/auth/me" ),
 };

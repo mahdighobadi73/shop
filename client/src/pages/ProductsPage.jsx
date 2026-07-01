@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useProducts } from "../hooks/useProducts";
+import { useProducts } from "../features/products/useProducts";
 import "./ProductsPage.css"
 
 const ProductsPage = () => {

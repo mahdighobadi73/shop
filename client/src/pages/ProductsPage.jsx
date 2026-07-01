@@ -30,7 +30,7 @@ const ProductsPage = () => {
 
             {/* search */ }
 
-            <div style={ { marginBottom: "20px" } }>
+            <div>
                 <input
                     type="text"
                     placeholder="جستجوی محصول..."
@@ -41,7 +41,7 @@ const ProductsPage = () => {
 
             {/* filters */ }
 
-            <div style={ { display: "flex", gap: "10px", marginBottom: "20px" } }>
+            <div>
 
                 <select value={ category } onChange={ ( e ) => setCategory( e.target.value ) }>
                     <option value="">همه دسته‌ها</option>
@@ -83,9 +83,9 @@ const ProductsPage = () => {
 
             {/* products */ }
 
-            <div style={ { display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "20px" } }>
+            <div>
                 { products?.map( ( product ) => (
-                    <div key={ product._id } style={ { border: "1px solid #ddd", padding: "10px" } }>
+                    <div key={ product._id }>
                         <img src={product.image} alt={product.name}/>
                         <h4>{ product.name }</h4>
                         <p>{ product.price } تومان</p>
